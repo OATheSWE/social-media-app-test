@@ -1,4 +1,5 @@
 import "../global.css";
+import "../fonts.css";
 import { router, Slot } from "expo-router";
 import { useEffect, useState } from "react";
 import { Splash } from "../src/pages";
@@ -24,7 +25,7 @@ const App = () => {
   }, [showSplash, router]);
 
   return (
-    <div className="">
+    <div className="font-poppins">
       {showSplash ? (
         <Splash />
       ) : (
