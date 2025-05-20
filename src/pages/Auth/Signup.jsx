@@ -61,7 +61,7 @@ const Signup = () => {
               <button
                 type="submit"
                 className="btn bg-accent2 text-white rounded-lg border-0 shadow-none w-full h-12 mt-4"
-                onClick={() => router.push("/verify-number")}
+                onClick={() => router.push("/auth/verify-number")}
               >
                 Submit
               </button>
@@ -71,7 +71,7 @@ const Signup = () => {
           <motion.div className="mt-6" variants={itemVariants}>
             <Touchable
               onClick={() => {
-                router.push("/login");
+                router.push("/auth/login");
               }}
             >
               <p className="text-center text-black text-[14px]">

@@ -53,7 +53,7 @@ const OnboardingScreenThree = () => {
             <Touchable
               className="w-full"
               onClick={() => {
-                router.push("/signup");
+                router.push("/auth/signup");
               }}
             >
               <button className="btn bg-accent2 border-0 shadow-none text-white rounded-md h-[50px] w-full">
@@ -63,7 +63,7 @@ const OnboardingScreenThree = () => {
             <Touchable
               className="w-full"
               onClick={() => {
-                router.push("/signup");
+                router.push("/auth/signup");
               }}
             >
               <button className="btn bg-white shadow-none text-black border-2 border-accent2 rounded-md h-[50px] w-full">
@@ -76,7 +76,7 @@ const OnboardingScreenThree = () => {
           <motion.div className="mt-6" variants={itemVariants}>
             <Touchable
               onClick={() => {
-                router.push("/login");
+                router.push("/auth/login");
               }}
             >
               <p className="text-center text-black text-[14px]">

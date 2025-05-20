@@ -8,3 +8,16 @@
     --color-accent2: #006175;
     --font-poppins: 'Poppins', 'serif';
 }
+
+@layer components {
+    .input-field {
+      @apply input validator floating-label text-[#151515] border border-[#817D7D] rounded-[15px] transition duration-150 ease-in-out w-full bg-[#F3F3F3] input-lg text-sm px-4 mb-2;
+    }
+  
+    .input-field span {
+      @apply bg-[#F3F3F3] text-gray-400;
+  
+    }
+  
+    
+  }

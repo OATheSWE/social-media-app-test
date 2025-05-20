@@ -1,10 +1,10 @@
 import React from 'react';
-import { Signup } from '../src/pages/Auth';
+import { Success } from '../../src/pages/Auth';
 
 
 const Home = () => {
     return (
-        <Signup />
+        <Success />
     );
 };
 

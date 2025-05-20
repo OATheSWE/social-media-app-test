@@ -64,7 +64,7 @@ const OnboardingScreenOne = () => {
               <Touchable
                 className="w-full"
                 onClick={() => {
-                  router.push("/signup");
+                  router.push("/auth/signup");
                 }}
               >
                 <button className="btn bg-white text-black shadow-none border-2 border-accent2 rounded-md h-[50px] w-full">
@@ -77,7 +77,7 @@ const OnboardingScreenOne = () => {
             <motion.div className="mt-6" variants={itemVariants}>
               <Touchable
                 onClick={() => {
-                  router.push("/login");
+                  router.push("/auth/login");
                 }}
               >
                 <p className="text-center text-black text-[14px]">

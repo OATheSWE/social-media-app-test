@@ -35,7 +35,7 @@ const VerifyNumber = () => {
       transition={pageTransitionX.transition}
     >
       <div className="py-9 px-6 w-full">
-        <Back route="/signup" text="" />
+        <Back route="/auth/signup" text="" />
       </div>
 
       <motion.div
@@ -75,7 +75,7 @@ const VerifyNumber = () => {
               <button
                 type="submit"
                 className="btn bg-accent2 text-white rounded-lg border-0 shadow-none w-full h-12 mt-4"
-                onClick={() => router.push("/personal-info")}
+                onClick={() => router.push("/auth/personal-info")}
               >
                 Submit
               </button>
@@ -85,7 +85,7 @@ const VerifyNumber = () => {
           <motion.div className="mt-20" variants={itemVariants}>
             <Touchable
               onClick={() => {
-                router.push("/login");
+                router.push("/auth/login");
               }}
             >
               <p className="text-center text-black text-[14px]">
