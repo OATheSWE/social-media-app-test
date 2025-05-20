@@ -12,7 +12,7 @@ const Back = ({route, text}) => {
             >
                 <ChevronLeft className="h-8 w-8 mr-1 text-accent2" />
             </Touchable>
-            <h1 className="text-[28px] font-bold">{text}</h1>
+            <h1 className="text-[28px] font-bold text-black dark:text-white">{text}</h1>
         </div>
     );
 };

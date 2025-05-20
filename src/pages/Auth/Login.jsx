@@ -121,7 +121,7 @@ export default function Login() {
           <Touchable className="w-full">
             <button
               type="submit"
-              className="btn bg-accent2 text-white rounded-full mt-4 h-[50px] w-full"
+              className="btn bg-accent2 shadow-none border-0 text-white rounded-full mt-4 h-[50px] w-full"
             >
               Login
             </button>
