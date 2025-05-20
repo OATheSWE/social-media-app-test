@@ -1,5 +1,6 @@
 import "../global.css";
 import "../fonts.css";
+import "react-phone-input-2/lib/style.css";
 import { router, Slot } from "expo-router";
 import { useEffect, useState } from "react";
 import { Splash } from "../src/pages";
