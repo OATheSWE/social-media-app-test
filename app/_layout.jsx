@@ -24,7 +24,7 @@ const App = () => {
   }, [showSplash, router]);
 
   return (
-    <div className="font-sans">
+    <div className="">
       {showSplash ? (
         <Splash />
       ) : (
