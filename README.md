@@ -1,50 +1,67 @@
-# Welcome to your Expo app 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# Social Media Web & Mobile App (Expo + Tailwind + DaisyUI)
 
-## Get started
+This project is a **responsive** and **animated social media application** built with **Expo** and **Tailwind CSS**, designed to work as both a **web app** and a **mobile app** from the same codebase with minimal adjustments.
 
-1. Install dependencies
+## 🛠️ Technologies Used
 
+- **Expo** (React Native for Web & Mobile)
+- **Tailwind CSS** (Utility-first styling)
+- **DaisyUI** (Tailwind CSS component library)
+- **Framer Motion** (For smooth animations)
+- **Context API + LocalStorage** (For state and data persistence)
+- **JSON Server** (Mock API backend)
+
+## 🧰 Installation
+
+1. **Install pnpm**  
    ```bash
-   npm install
+   npm install -g pnpm
    ```
 
-2. Start the app
-
+2. **Install dependencies**
    ```bash
-   npx expo start
+   pnpm install
    ```
 
-In the output, you'll find options to open the app in a
+3. **Start the Expo web app**
+   ```bash
+   pnpm run web
+   ```
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+4. **Install JSON Server globally**
+   ```bash
+   npm install -g json-server
+   ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+5. **Run the mock API**
+   ```bash
+   json-server --watch src/api/db.json --port 3001
+   ```
 
-## Get a fresh project
+> Make sure the JSON Server is running before using any feature that relies on data fetching.
 
-When you're ready, run:
+## ✨ Features Implemented
 
-```bash
-npm run reset-project
-```
+- ✅ **Onboarding Screens**  
+- ✅ **Authentication System** (Login/Signup) using **Local Storage** & **Context API**
+- ✅ **Home Feed** with posts and updates  
+- ✅ **Influencer Profile** & **User Profile** pages  
+- ✅ **Real-time Filtering** of content  
+- ✅ **Dark/Light Theme Toggle**  
+  - Theme state saved in Local Storage
+  - Applied via Tailwind's `darkMode: 'class'` strategy  
+- ✅ **Responsive Design** for web and mobile  
+- ✅ **Animations & Transitions** using **Framer Motion**  
+- ✅ **Error Handling** for failed requests and invalid inputs
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 📱 Platform Agnostic
 
-## Learn more
+This project was developed using **Expo**, allowing the codebase to run as:
+- A full-fledged **Web Application**
+- A **Mobile App** (Android/iOS) via Expo go or custom builds
 
-To learn more about developing your project with Expo, look at the following resources:
+> With a few tweaks (like image optimization and platform-specific components), the app can be deployed on both **web** and **mobile platforms**.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 📬 Contact
+For questions, feedback, or contributions, feel free to reach out.
