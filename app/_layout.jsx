@@ -21,7 +21,7 @@ const App = () => {
   useEffect(() => {
     // Navigate to /website after the splash screen is hidden
     if (!showSplash) {
-      router.replace("/app/home"); // Use replace to avoid keeping the splash in history
+      router.replace("/app/influencer-profile"); // Use replace to avoid keeping the splash in history
     }
   }, [showSplash, router]);
 

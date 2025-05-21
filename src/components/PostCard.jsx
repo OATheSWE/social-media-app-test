@@ -17,17 +17,23 @@ const PostCard = ({
   return (
     <div className="card bg-[#ECEBF1] shadow-md rounded-box p-4 max-w-md w-full">
       {/* Header */}
-      <div className="flex items-center space-x-3">
-        <div className="avatar">
-          <div className="w-12 rounded-full">
-            <img src={profilePic} alt={username} />
+      <Touchable
+        onClick={() => {
+          router.push("/app/influencer-profile");
+        }}
+      >
+        <div className="flex items-center space-x-3">
+          <div className="avatar">
+            <div className="w-12 rounded-full">
+              <img src={profilePic} alt={username} />
+            </div>
+          </div>
+          <div>
+            <h2 className="font-bold text-lg text-black">{username}</h2>
+            <p className="text-sm text-black">{timeAgo}</p>
           </div>
         </div>
-        <div>
-          <h2 className="font-bold text-lg text-black">{username}</h2>
-          <p className="text-sm text-black">{timeAgo}</p>
-        </div>
-      </div>
+      </Touchable>
 
       {/* Text Content */}
       <p className="mt-4 text-sm text-black">{text}</p>
