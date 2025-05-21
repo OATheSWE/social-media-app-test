@@ -81,5 +81,173 @@
       "time": "6 hrs ago",
       "img": "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7"
     }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "profilePic": "https://randomuser.me/api/portraits/men/32.jpg",
+      "username": "Oyin Dolapo",
+      "timeAgo": "1hr ago",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. #Pharetra",
+      "image": "https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif",
+      "likedByPics": [
+        "https://randomuser.me/api/portraits/men/40.jpg",
+        "https://randomuser.me/api/portraits/men/41.jpg",
+        "https://randomuser.me/api/portraits/men/42.jpg"
+      ],
+      "likedByName": "Blazinshado",
+      "totalLikes": 247,
+      "totalComments": 57,
+      "comment": [
+        {
+          "name": "Kemi Ade",
+          "text": "Love this post! So inspiring.",
+          "time": "45m ago",
+          "img": "https://randomuser.me/api/portraits/women/65.jpg"
+        },
+        {
+          "name": "John Smith",
+          "text": "Great perspective here.",
+          "time": "30m ago",
+          "img": "https://randomuser.me/api/portraits/men/12.jpg"
+        },
+        {
+          "name": "Amaka Eze",
+          "text": "Thanks for sharing!",
+          "time": "20m ago",
+          "img": "https://randomuser.me/api/portraits/women/22.jpg"
+        },
+        {
+          "name": "Michael Obi",
+          "text": "Awesome content as always.",
+          "time": "10m ago",
+          "img": "https://randomuser.me/api/portraits/men/34.jpg"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "profilePic": "https://randomuser.me/api/portraits/women/50.jpg",
+      "username": "Ada Obi",
+      "timeAgo": "2hrs ago",
+      "text": "Had a wonderful time with my friends today! #Fun",
+      "image": "https://images.unsplash.com/photo-1502685104226-ee32379fefbe",
+      "likedByPics": [
+        "https://randomuser.me/api/portraits/women/52.jpg",
+        "https://randomuser.me/api/portraits/women/53.jpg"
+      ],
+      "likedByName": "QueenTee",
+      "totalLikes": 189,
+      "totalComments": 34,
+      "comment": [
+        {
+          "name": "Tunde Balogun",
+          "text": "Looks like a blast!",
+          "time": "1hr ago",
+          "img": "https://randomuser.me/api/portraits/men/44.jpg"
+        },
+        {
+          "name": "Chika Nwosu",
+          "text": "Wish I was there!",
+          "time": "50m ago",
+          "img": "https://randomuser.me/api/portraits/women/33.jpg"
+        },
+        {
+          "name": "Jide Afolayan",
+          "text": "Great vibes!",
+          "time": "40m ago",
+          "img": "https://randomuser.me/api/portraits/men/55.jpg"
+        },
+        {
+          "name": "Ngozi Okafor",
+          "text": "Beautiful moments captured.",
+          "time": "30m ago",
+          "img": "https://randomuser.me/api/portraits/women/77.jpg"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "profilePic": "https://randomuser.me/api/portraits/men/22.jpg",
+      "username": "Chinedu Okeke",
+      "timeAgo": "3hrs ago",
+      "text": "Just finished an amazing workout! #Fitness",
+      "image": "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif",
+      "likedByPics": [
+        "https://randomuser.me/api/portraits/men/30.jpg",
+        "https://randomuser.me/api/portraits/men/31.jpg",
+        "https://randomuser.me/api/portraits/men/33.jpg"
+      ],
+      "likedByName": "FitGuy",
+      "totalLikes": 120,
+      "totalComments": 22,
+      "comment": [
+        {
+          "name": "Sade Akin",
+          "text": "Keep it up!",
+          "time": "2hrs ago",
+          "img": "https://randomuser.me/api/portraits/women/25.jpg"
+        },
+        {
+          "name": "Emeka Ude",
+          "text": "Motivated by this!",
+          "time": "1hr 45m ago",
+          "img": "https://randomuser.me/api/portraits/men/18.jpg"
+        },
+        {
+          "name": "Funmi Adeyemi",
+          "text": "Awesome dedication.",
+          "time": "1hr 30m ago",
+          "img": "https://randomuser.me/api/portraits/women/15.jpg"
+        },
+        {
+          "name": "Bola Shonibare",
+          "text": "Inspiring!",
+          "time": "1hr 10m ago",
+          "img": "https://randomuser.me/api/portraits/men/45.jpg"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "profilePic": "https://randomuser.me/api/portraits/women/28.jpg",
+      "username": "Ngozi Eze",
+      "timeAgo": "5hrs ago",
+      "text": "Loving the new book I’m reading! #ReadingTime",
+      "image": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e",
+      "likedByPics": [
+        "https://randomuser.me/api/portraits/women/35.jpg",
+        "https://randomuser.me/api/portraits/women/36.jpg"
+      ],
+      "likedByName": "BookLover",
+      "totalLikes": 87,
+      "totalComments": 19,
+      "comment": [
+        {
+          "name": "Chinwe Nduka",
+          "text": "Great choice!",
+          "time": "4hrs ago",
+          "img": "https://randomuser.me/api/portraits/women/40.jpg"
+        },
+        {
+          "name": "Tomiwa Fashola",
+          "text": "Adding it to my list!",
+          "time": "3hrs 30m ago",
+          "img": "https://randomuser.me/api/portraits/men/38.jpg"
+        },
+        {
+          "name": "Yemi Lawal",
+          "text": "How is it so far?",
+          "time": "3hrs ago",
+          "img": "https://randomuser.me/api/portraits/men/29.jpg"
+        },
+        {
+          "name": "Adesuwa Okoro",
+          "text": "Can’t wait to start it.",
+          "time": "2hrs 45m ago",
+          "img": "https://randomuser.me/api/portraits/women/41.jpg"
+        }
+      ]
+    }
   ]
 }

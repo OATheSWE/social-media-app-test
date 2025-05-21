@@ -3,58 +3,35 @@ import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUp, Bell, Search, SlidersHorizontal } from "lucide-react";
 import { router } from "expo-router";
-import { PostCard, Touchable } from "@/src/components";
-
-const initialPosts = [
-  {
-    id: 1,
-    profilePic: "https://randomuser.me/api/portraits/men/32.jpg",
-    username: "Oyin Dolapo",
-    timeAgo: "1hr ago",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. #Pharetra",
-    image: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe",
-    likedByPics: [
-      "https://randomuser.me/api/portraits/men/40.jpg",
-      "https://randomuser.me/api/portraits/men/41.jpg",
-      "https://randomuser.me/api/portraits/men/42.jpg",
-    ],
-    likedByName: "Blazinshado",
-    totalLikes: 247,
-    totalComments: 57,
-  },
-  {
-    id: 2,
-    profilePic: "https://randomuser.me/api/portraits/women/50.jpg",
-    username: "Ada Obi",
-    timeAgo: "2hrs ago",
-    text: "Had a wonderful time with my friends today! #Fun",
-    image: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe",
-    likedByPics: [
-      "https://randomuser.me/api/portraits/women/52.jpg",
-      "https://randomuser.me/api/portraits/women/53.jpg",
-    ],
-    likedByName: "QueenTee",
-    totalLikes: 189,
-    totalComments: 34,
-  },
-];
+import { AlertError, PostCard, Touchable } from "@/src/components";
+import axios from "axios";
 
 const Main = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [posts, setPosts] = useState(initialPosts);
+  const [posts, setPosts] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [y, setY] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [showFilterMenu, setShowFilterMenu] = useState(false);
   const [filterBy, setFilterBy] = useState("");
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
+    axios
+      .get("http://localhost:3001/posts")
+      .then((response) => {
+        const postsData = response.data;
 
-    return () => clearTimeout(timer);
+        setTimeout(() => {
+          setPosts(postsData);
+          setIsLoading(false);
+        }, 1500);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch posts:", error);
+        setError("Failed to fetch posts");
+      });
   }, []);
 
   const handleRefresh = () => {
@@ -255,6 +232,7 @@ const Main = () => {
                 likedByName={post.likedByName}
                 totalLikes={post.totalLikes}
                 totalComments={post.totalComments}
+                id={post.id}
               />
             ))}
         </div>
@@ -262,23 +240,26 @@ const Main = () => {
 
       <AnimatePresence>
         {showScrollTop && (
-        <Touchable>
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.3 }}
-            onClick={() => {
-              const container = document.querySelector(".overflow-y-scroll");
-              if (container) container.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-            className="fixed bottom-20 right-6 bg-accent2  text-white p-4 rounded-full shadow-lg z-50"
-          >
-            <ArrowUp className="w-5 h-5" />
-          </motion.button>
-        </Touchable>
-         )} 
+          <Touchable>
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => {
+                const container = document.querySelector(".overflow-y-scroll");
+                if (container)
+                  container.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className="fixed bottom-20 right-6 bg-accent2  text-white p-4 rounded-full shadow-lg z-50"
+            >
+              <ArrowUp className="w-5 h-5" />
+            </motion.button>
+          </Touchable>
+        )}
       </AnimatePresence>
+
+      <AlertError message={error} />
     </motion.div>
   );
 };

@@ -13,6 +13,7 @@ const PostCard = ({
   likedByName = "Someone",
   totalLikes = 0,
   totalComments = 0,
+  id,
 }) => {
   return (
     <div className="card bg-[#ECEBF1] shadow-md rounded-box p-4 max-w-md w-full">
@@ -58,7 +59,7 @@ const PostCard = ({
           </div>
           <p className="text-sm text-black">
             Liked by <span className="font-semibold">{likedByName}</span> and{" "}
-            <span className="font-semibold">100+ others</span>
+            <span className="font-semibold">{totalLikes} others</span>
           </p>
         </div>
 
@@ -79,7 +80,7 @@ const PostCard = ({
       <Touchable
         className="mt-2 text-sm text-black"
         onClick={() => {
-          router.push("/app/all-comments");
+          router.push(`/app/all-comments/${id}`);
         }}
       >
         View all {totalComments} comments
