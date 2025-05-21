@@ -231,7 +231,7 @@ const Main = () => {
           </Touchable>
         </div>
 
-        <div className="flex flex-col space-y-4 mt-5 pb-10">
+        <div className="flex flex-col space-y-4 mt-5 pb-10 md:justify-center items-center">
           {(isRefreshing || isLoading) &&
             Array.from({ length: 3 }).map((_, index) => (
               <div
