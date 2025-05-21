@@ -7,13 +7,18 @@ import {
   itemVariants,
   pageTransitionX,
 } from "../../../constants";
-import { Back, LoadingScreen, Touchable } from "../../components";
+import { AlertError, Back, LoadingScreen, Touchable } from "../../components";
 
 const Signup = () => {
   const [number, setNumber] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = () => {
+    if (!number) {
+      setError("Please enter a valid phone number");
+      return;
+    }
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
@@ -94,6 +99,7 @@ const Signup = () => {
       </motion.div>
 
       <LoadingScreen visible={loading} />
+      <AlertError message={error} />
     </motion.div>
   );
 };

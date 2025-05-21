@@ -1,5 +1,23 @@
 {
-    "verification": {
-      "code": "76421"
+  "verification": {
+    "code": "76421"
+  },
+  "users": [
+    {
+      "id": "f176",
+      "username": "oa17",
+      "email": "osby10@gmail.com",
+      "gender": "Male",
+      "password": "Ogechi1234",
+      "about": "Im a fun person by nature"
+    },
+    {
+      "id": "c552",
+      "username": "osby",
+      "email": "oatheswe@gmail.com",
+      "gender": "Male",
+      "password": "Ogechi12",
+      "about": "Im a tech bro"
     }
-  }
+  ]
+}
