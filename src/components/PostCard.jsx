@@ -80,7 +80,7 @@ const PostCard = ({
       <Touchable
         className="mt-2 text-sm text-black"
         onClick={() => {
-          router.push(`/app/all-comments/${id}`);
+          router.push(`/app/all-comments?id=${id}`);
         }}
       >
         View all {totalComments} comments
