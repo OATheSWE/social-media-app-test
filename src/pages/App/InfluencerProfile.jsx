@@ -119,8 +119,8 @@ const InfluencerProfile = () => {
                 className="rounded-full w-20 h-20 object-cover"
               />
               <div>
-                <h1 className="text-xl font-bold">{influencer.username}</h1>
-                <p className="text-sm text-gray-500 dark:text-white">
+                <h1 className="text-xl font-bold text-black dark:text-white">{influencer.username}</h1>
+                <p className="text-sm text-black dark:text-white">
                   {influencer.region}
                 </p>
               </div>
@@ -131,32 +131,32 @@ const InfluencerProfile = () => {
             className="flex items-center justify-between gap-2 mt-4"
             variants={itemVariants}
           >
-            <p className="mt-2 text-sm">{influencer.about}</p>
+            <p className="mt-2 text-sm text-black dark:text-white">{influencer.about}</p>
             <button className="btn bg-accent2 text-white dark:bg-white dark:text-accent2 btn-sm rounded-full px-6">
               Follow
             </button>
           </motion.div>
 
           <motion.div
-            className="flex justify-between text-center mt-6 border-t border-b py-4"
+            className="flex justify-between text-center mt-6 border-t border-b border-black dark:border-white py-4"
             variants={itemVariants}
           >
             <div>
-              <p className="font-bold">{influencer.posts || posts.length}</p>
+              <p className="font-bold text-black dark:text-white">{influencer.posts || posts.length}</p>
               <p className="text-sm text-gray-500 dark:text-white">Posts</p>
             </div>
             <div>
-              <p className="font-bold">{influencer.following || 0}</p>
+              <p className="font-bold text-black dark:text-white">{influencer.following || 0}</p>
               <p className="text-sm text-gray-500 dark:text-white">Following</p>
             </div>
             <div>
-              <p className="font-bold">{influencer.followers || 0}</p>
+              <p className="font-bold text-black dark:text-white">{influencer.followers || 0}</p>
               <p className="text-sm text-gray-500 dark:text-white">Followers</p>
             </div>
           </motion.div>
 
           <motion.div className="mt-6" variants={itemVariants}>
-            <h2 className="font-bold mb-2">Posts</h2>
+            <h2 className="font-bold mb-2 text-black dark:text-white">Posts</h2>
             <div className="grid grid-cols-3 gap-3">
               {posts.map((post, idx) => (
                 <Touchable

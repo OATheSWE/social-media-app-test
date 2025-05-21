@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { ConfirmModal, Touchable } from "../../components";
 import { containerVariants, itemVariants, pageTransitionX } from "@/constants";
@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { router } from "expo-router";
 import { useAuth } from "@/src/context/AuthContext";
 import { LogOut, Moon, Sun } from "lucide-react";
+import { ThemeContext } from "@/src/context/ThemeContext";
 
 const UserProfile = () => {
 
@@ -15,7 +16,7 @@ const UserProfile = () => {
   const { userId, logout } = useAuth()
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState(null);
-  const [isDark, setIsDark] = useState(false);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   useEffect(() => {
     async function fetchData() {
@@ -69,6 +70,7 @@ const UserProfile = () => {
     setModalOpen(false);
     setModalType(null);
   };
+
 
   return (
     <motion.div
@@ -145,17 +147,17 @@ const UserProfile = () => {
                 className="rounded-full w-20 h-20 object-cover"
               />
               <div>
-                <h1 className="text-xl font-bold">{user.username}</h1>
-                <p className="text-sm text-gray-500 dark:text-white">
+                <h1 className="text-xl font-bold text-black dark:text-white">{user.username}</h1>
+                <p className="text-sm text-black dark:text-white">
                   {user.region || "Lagos, Nigeria"}
                 </p>
               </div>
             </div>
-            <Touchable className="btn btn-ghost btn-sm" >
-              {isDark ? (
-                <Sun className="w-5 h-5" />
+            <Touchable className="btn btn-ghost btn-sm" onClick={toggleTheme}>
+              {theme === 'dark' ? (
+                <Sun className="w-5 h-5 text-black dark:text-white" />
               ) : (
-                <Moon className="w-5 h-5" />
+                <Moon className="w-5 h-5 text-black dark:text-white" />
               )}
             </Touchable>
           </motion.div>
@@ -164,30 +166,30 @@ const UserProfile = () => {
             className="flex items-center justify-between gap-2 mt-4"
             variants={itemVariants}
           >
-            <p className="mt-2 text-sm">{user.about}</p>
+            <p className="mt-2 text-sm text-black dark:text-white">{user.about}</p>
             
           </motion.div>
 
           <motion.div
-            className="flex justify-between text-center mt-6 border-t border-b py-4"
+            className="flex justify-between text-center mt-6 border-t border-b border-accent2 dark:border-white py-4"
             variants={itemVariants}
           >
             <div>
-              <p className="font-bold">{posts.length || 0}</p>
+              <p className="font-bold text-black dark:text-white">{posts.length || 0}</p>
               <p className="text-sm text-gray-500 dark:text-white">Posts</p>
             </div>
             <div>
-              <p className="font-bold">{user.following || 0}</p>
+              <p className="font-bold text-black dark:text-white">{user.following || 0}</p>
               <p className="text-sm text-gray-500 dark:text-white">Following</p>
             </div>
             <div>
-              <p className="font-bold">{user.followers || 0}</p>
+              <p className="font-bold text-black dark:text-white">{user.followers || 0}</p>
               <p className="text-sm text-gray-500 dark:text-white">Followers</p>
             </div>
           </motion.div>
 
           <motion.div className="mt-6" variants={itemVariants}>
-            <h2 className="font-bold mb-2">Posts</h2>
+            <h2 className="font-bold mb-2 text-black dark:text-white">Posts</h2>
             <div className="grid grid-cols-3 gap-3">
               {posts.map((post, idx) => (
                 <Touchable

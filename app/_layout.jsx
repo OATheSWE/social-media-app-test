@@ -5,6 +5,7 @@ import { router, Slot } from "expo-router";
 import { useEffect, useState } from "react";
 import { Splash } from "../src/pages";
 import { AuthProvider, useAuth } from "@/src/context/AuthContext";
+import { ThemeProvider } from "@/src/context/ThemeContext";
 
 const MainApp = () => {
   const { isLoggedIn } = useAuth();
@@ -42,7 +43,9 @@ const MainApp = () => {
 
 const App = () => (
   <AuthProvider>
-    <MainApp />
+    <ThemeProvider>
+      <MainApp />
+    </ThemeProvider>
   </AuthProvider>
 );
 

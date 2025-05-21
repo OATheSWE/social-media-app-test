@@ -18,6 +18,14 @@
       "gender": "Male",
       "password": "Ogechi12",
       "about": "Im a tech bro"
+    },
+    {
+      "id": "5f1f",
+      "username": "Osborne",
+      "email": "oatheswe@gmail.com",
+      "gender": "Male",
+      "password": "1234Ruu",
+      "about": "I am keen on solving problems with technology"
     }
   ],
   "notifications": [
@@ -250,7 +258,7 @@
       ]
     }
   ],
-  "influencers" : [
+  "influencers": [
     {
       "username": "Oyin Dolapo",
       "image": "https://randomuser.me/api/portraits/men/32.jpg",
@@ -288,5 +296,4 @@
       "followers": 5300
     }
   ]
-  
 }
