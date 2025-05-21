@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function LoadingOverlay({ visible }) {
+export default function LoadingScreen({ visible }) {
     if (!visible) return null;
 
     return (

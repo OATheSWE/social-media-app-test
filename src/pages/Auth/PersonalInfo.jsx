@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { router } from "expo-router";
 import { pageTransitionX } from "../../../constants";
-import { AlertError, AlertSuccess, Touchable } from "../../components";
+import { AlertError, AlertSuccess, LoadingScreen, Touchable } from "../../components";
 import LoadingOverlay from "../../components/Loading-Screen";
 
 export default function Signup() {
@@ -206,7 +206,7 @@ export default function Signup() {
       {/* Alerts and Loader */}
       <AlertSuccess message={successMessage} />
       <AlertError message={error} />
-      <LoadingOverlay visible={processing} />
+      <LoadingScreen visible={processing} />
     </motion.div>
   );
 }

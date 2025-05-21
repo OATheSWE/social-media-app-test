@@ -7,10 +7,19 @@ import {
   itemVariants,
   pageTransitionX,
 } from "../../../constants";
-import { Back, Touchable } from "../../components";
+import { Back, LoadingScreen, Touchable } from "../../components";
 
 const Signup = () => {
   const [number, setNumber] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      router.push("/auth/verify-number");
+    }, 1500);
+  };
 
   return (
     <motion.div
@@ -37,7 +46,7 @@ const Signup = () => {
           <label className="input-field outline-accent2 w-full text-black">
             <span>Enter your phone number</span>
             <PhoneInput
-              country={"ng"} // Set Nigeria as default, change if needed
+              country={"ng"}
               value={number}
               onChange={(phone) => setNumber(phone)}
               inputStyle={{
@@ -59,9 +68,8 @@ const Signup = () => {
           <motion.div variants={itemVariants}>
             <Touchable>
               <button
-                type="submit"
                 className="btn bg-accent2 text-white rounded-lg border-0 shadow-none w-full h-12 mt-4"
-                onClick={() => router.push("/auth/verify-number")}
+                onClick={handleSubmit}
               >
                 Submit
               </button>
@@ -84,6 +92,8 @@ const Signup = () => {
           </motion.div>
         </div>
       </motion.div>
+
+      <LoadingScreen visible={loading} />
     </motion.div>
   );
 };
