@@ -1,78 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { BellIcon } from "lucide-react";
+import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
-import { Back } from "../../components";
+import { AlertError, Back } from "../../components";
 import { pageTransitionX } from "../../../constants";
-
-// Fake notification API simulation
-const fetchNotifications = () =>
-  new Promise((resolve) =>
-    setTimeout(() => {
-      resolve([
-        {
-          id: 1,
-          text: "10 parents just paid school fees",
-          time: "10:40am",
-        },
-        {
-          id: 2,
-          text: "New assignment uploaded for Grade 5",
-          time: "09:15am",
-        },
-        {
-          id: 3,
-          text: "Sports Day rescheduled to May 20",
-          time: "Yesterday",
-        },
-        {
-          id: 4,
-          text: "Server maintenance completed",
-          time: "2 days ago",
-        },
-        {
-          id: 5,
-          text: "Server maintenance completed",
-          time: "2 days ago",
-        },
-        {
-          id: 4,
-          text: "Server maintenance completed",
-          time: "2 days ago",
-        },
-        {
-          id: 5,
-          text: "Server maintenance completed",
-          time: "2 days ago",
-        },
-        {
-          id: 4,
-          text: "Server maintenance completed",
-          time: "2 days ago",
-        },
-        {
-          id: 5,
-          text: "Server maintenance completed",
-          time: "2 days ago",
-        },
-        {
-          id: 4,
-          text: "Server maintenance completed",
-          time: "2 days ago",
-        },
-        
-      ]);
-    }, 2000)
-  );
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchNotifications().then((data) => {
-      setNotifications(data);
-      setLoading(false);
-    });
+    const img = new Image();
+    img.src = "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0";
+    axios
+      .get("http://localhost:3001/notifications")
+      .then((response) => {
+        const notificationsData = response.data;
+
+        setTimeout(() => {
+          setNotifications(notificationsData);
+          setLoading(false);
+        }, 1500);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch notifications:", error);
+        setError("Failed to fetch notifications");
+      });
   }, []);
 
   return (
@@ -83,18 +36,14 @@ const Notifications = () => {
       exit={pageTransitionX.exit}
       transition={pageTransitionX.transition}
     >
-      {/* <div className="max-lg:divider"></div> */}
-
       <div className="w-full lg:pt-6 lg:pb-10 px-6 h-screen overflow-y-scroll">
         <div className="w-full mb-10">
           <Back route="/app/home" text="Notifications" />
         </div>
-        {/* <div className="lg:divider"></div> */}
 
-        {/* Skeleton loading */}
         {loading ? (
           <div className="space-y-4 pt-5">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
+            {[...Array(12)].map((_, i) => (
               <div key={i} className="flex items-center gap-3 animate-pulse">
                 <div className="bg-gray-200 rounded-full h-12 w-12" />
                 <div className="flex-1 space-y-2">
@@ -108,8 +57,7 @@ const Notifications = () => {
           <AnimatePresence>
             {notifications.map((note, index) => (
               <motion.div
-                key={note.id}
-                className=""
+                key={`${note.id}-${index}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
@@ -119,21 +67,31 @@ const Notifications = () => {
                 }}
               >
                 <div className="flex items-center gap-3 pb-8">
-                  <div className="bg-gray-100 rounded-full flex justify-center items-center h-12 w-12">
-                    <BellIcon className="text-accent2" />
+                  <div className="bg-gray-100 rounded-full flex justify-center items-center h-12 w-12 overflow-hidden">
+                    {note.img ? (
+                      <img
+                        src={`https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0`}
+                        alt="notification"
+                        className="object-cover h-12 w-12 rounded-full"
+                      />
+                    ) : (
+                      <div className="text-accent2">🔔</div> // fallback if no img
+                    )}
                   </div>
                   <div>
                     <p className="text-black dark:text-white">{note.text}</p>
-                    <p className=" text-gray-500 text-sm dark:text-white">{note.time}</p>
+                    <p className="text-gray-500 text-sm dark:text-white">
+                      {note.time}
+                    </p>
                   </div>
                 </div>
-                {/* <div className="divider"></div> */}
               </motion.div>
             ))}
           </AnimatePresence>
         )}
       </div>
 
+      <AlertError message={error} />
     </motion.div>
   );
 };

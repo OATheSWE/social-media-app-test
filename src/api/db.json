@@ -19,5 +19,67 @@
       "password": "Ogechi12",
       "about": "Im a tech bro"
     }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "text": "Bidemi liked your post",
+      "time": "2 days ago",
+      "img": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0"
+    },
+    {
+      "id": 2,
+      "text": "Adbeola commented on your post",
+      "time": "2 hrs ago",
+      "img": "https://images.unsplash.com/photo-1511367461989-f85a21fda167"
+    },
+    {
+      "id": 3,
+      "text": "Chinedu started following you",
+      "time": "1 week ago",
+      "img": "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91"
+    },
+    {
+      "id": 4,
+      "text": "Ngozi sent you a friend request",
+      "time": "3 days ago",
+      "img": "https://images.unsplash.com/photo-1544005313-94ddf0286df2"
+    },
+    {
+      "id": 5,
+      "text": "Tunde mentioned you in a comment",
+      "time": "5 hrs ago",
+      "img": "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91"
+    },
+    {
+      "id": 6,
+      "text": "Amaka shared your post",
+      "time": "4 days ago",
+      "img": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1"
+    },
+    {
+      "id": 7,
+      "text": "Emeka updated his profile picture",
+      "time": "1 day ago",
+      "img": "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7"
+    },
+    {
+      "id": 8,
+      "text": "Blessing liked your comment",
+      "time": "30 mins ago",
+      "img": "https://images.unsplash.com/photo-1544005313-94ddf0286df2"
+    },
+    {
+      "id": 9,
+      "text": "Kemi sent you a message",
+      "time": "2 hrs ago",
+      "img": "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91"
+    },
+    {
+      "id": 10,
+      "text": "Olu shared a new post",
+      "time": "6 hrs ago",
+      "img": "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7"
+    }
   ]
 }
