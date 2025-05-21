@@ -249,5 +249,44 @@
         }
       ]
     }
+  ],
+  "influencers" : [
+    {
+      "username": "Oyin Dolapo",
+      "image": "https://randomuser.me/api/portraits/men/32.jpg",
+      "region": "Lagos",
+      "about": "Sharing the best of Lagos lifestyle and culture with my followers.",
+      "posts": 1,
+      "following": 230,
+      "followers": 12500
+    },
+    {
+      "username": "Ada Obi",
+      "image": "https://randomuser.me/api/portraits/women/50.jpg",
+      "region": "Abuja",
+      "about": "Latest fashion and lifestyle trends straight from Abuja.",
+      "posts": 1,
+      "following": 180,
+      "followers": 8400
+    },
+    {
+      "username": "Chinedu Okeke",
+      "image": "https://example.com/images/naijafoodie.jpg",
+      "region": "Lagos",
+      "about": "Exploring Nigeria's rich culinary delights one dish at a time.",
+      "posts": 1,
+      "following": 300,
+      "followers": 16200
+    },
+    {
+      "username": "Ngozi Eze",
+      "image": "https://randomuser.me/api/portraits/women/28.jpg",
+      "region": "Abuja",
+      "about": "Travel, adventure and hidden gems of Abuja and beyond.",
+      "posts": 1,
+      "following": 95,
+      "followers": 5300
+    }
   ]
+  
 }

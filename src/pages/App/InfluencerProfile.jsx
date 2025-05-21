@@ -1,28 +1,48 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Touchable } from "../../components";
 import { containerVariants, itemVariants, pageTransitionX } from "@/constants";
 import { motion } from "framer-motion";
+import { router, useLocalSearchParams } from "expo-router";
 
 const InfluencerProfile = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const { username } = useLocalSearchParams();
 
-  const posts = [
-    "https://randomuser.me/api/portraits/women/80.jpg",
-    "https://randomuser.me/api/portraits/women/80.jpg",
-    "https://randomuser.me/api/portraits/women/80.jpg",
-    "https://randomuser.me/api/portraits/women/80.jpg",
-    "https://randomuser.me/api/portraits/women/80.jpg",
-    "https://randomuser.me/api/portraits/women/80.jpg",
-  ];
+  const [isLoading, setIsLoading] = useState(true);
+  const [influencer, setInfluencer] = useState(null);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1500); // 1500ms = 1.5 seconds
-    return () => clearTimeout(timer);
-  }, []);
+    async function fetchData() {
+      try {
+        const [infRes, postsRes] = await Promise.all([
+          axios.get("http://localhost:3001/influencers"),
+          axios.get("http://localhost:3001/posts"),
+        ]);
 
-  
+        // Find influencer by username
+        const foundInfluencer = infRes.data.find(
+          (inf) => inf.username === username
+        );
+        setInfluencer(foundInfluencer || null);
+
+        // Filter posts for the username
+        const userPosts = postsRes.data.filter(
+          (post) => post.username === username
+        );
+
+        // Map posts to image URLs or objects as needed
+        setPosts(userPosts);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setInfluencer(null);
+        setPosts([]);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchData();
+  }, [username]);
 
   return (
     <motion.div
@@ -78,7 +98,7 @@ const InfluencerProfile = () => {
             </div>
           </div>
         </div>
-      ) : (
+      ) : influencer ? (
         <motion.div
           className="max-w-md mx-auto p-6 font-sans"
           variants={containerVariants}
@@ -91,14 +111,17 @@ const InfluencerProfile = () => {
           >
             <div className="flex gap-4 items-center">
               <img
-                src="https://randomuser.me/api/portraits/women/80.jpg"
+                src={
+                  influencer.image ||
+                  "https://randomuser.me/api/portraits/women/80.jpg"
+                }
                 alt="Profile"
                 className="rounded-full w-20 h-20 object-cover"
               />
               <div>
-                <h1 className="text-xl font-bold">Abdul Qudus</h1>
+                <h1 className="text-xl font-bold">{influencer.username}</h1>
                 <p className="text-sm text-gray-500 dark:text-white">
-                  Abeokuta, Ogun
+                  {influencer.region}
                 </p>
               </div>
             </div>
@@ -108,9 +131,7 @@ const InfluencerProfile = () => {
             className="flex items-center justify-between gap-2 mt-4"
             variants={itemVariants}
           >
-            <p className="mt-2 text-sm">
-              I’m a positive person. I love to travel and eat
-            </p>
+            <p className="mt-2 text-sm">{influencer.about}</p>
             <button className="btn bg-accent2 text-white dark:bg-white dark:text-accent2 btn-sm rounded-full px-6">
               Follow
             </button>
@@ -121,15 +142,15 @@ const InfluencerProfile = () => {
             variants={itemVariants}
           >
             <div>
-              <p className="font-bold">87</p>
+              <p className="font-bold">{influencer.posts || posts.length}</p>
               <p className="text-sm text-gray-500 dark:text-white">Posts</p>
             </div>
             <div>
-              <p className="font-bold">870</p>
+              <p className="font-bold">{influencer.following || 0}</p>
               <p className="text-sm text-gray-500 dark:text-white">Following</p>
             </div>
             <div>
-              <p className="font-bold">15k</p>
+              <p className="font-bold">{influencer.followers || 0}</p>
               <p className="text-sm text-gray-500 dark:text-white">Followers</p>
             </div>
           </motion.div>
@@ -137,10 +158,15 @@ const InfluencerProfile = () => {
           <motion.div className="mt-6" variants={itemVariants}>
             <h2 className="font-bold mb-2">Posts</h2>
             <div className="grid grid-cols-3 gap-3">
-              {posts.map((img, idx) => (
-                <Touchable key={idx}>
+              {posts.map((post, idx) => (
+                <Touchable
+                  key={idx}
+                  onClick={() => {
+                    router.push(`/app/all-comments?id=${post.id}`);
+                  }}
+                >
                   <motion.img
-                    src={img}
+                    src={post.image}
                     alt={`Post ${idx + 1}`}
                     className="w-full h-24 object-cover rounded-xl"
                     variants={itemVariants}
@@ -150,6 +176,10 @@ const InfluencerProfile = () => {
             </div>
           </motion.div>
         </motion.div>
+      ) : (
+        <div className="max-w-md mx-auto p-6 font-sans text-center text-red-500">
+          <p>Influencer with username not found.</p>
+        </div>
       )}
     </motion.div>
   );

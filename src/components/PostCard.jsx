@@ -20,7 +20,7 @@ const PostCard = ({
       {/* Header */}
       <Touchable
         onClick={() => {
-          router.push("/app/influencer-profile");
+          router.push(`/app/influencer-profile?username=${username}`);
         }}
       >
         <div className="flex items-center space-x-3">
