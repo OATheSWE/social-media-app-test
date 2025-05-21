@@ -120,8 +120,11 @@ export default function Login() {
 
           <Touchable className="w-full">
             <button
-              type="submit"
+            //   type="submit"
               className="btn bg-accent2 shadow-none border-0 text-white rounded-full mt-4 h-[50px] w-full"
+              onClick={() => {
+                router.push("/app/home");
+              }}
             >
               Login
             </button>
@@ -131,7 +134,7 @@ export default function Login() {
         <Touchable
           className="fixed bottom-20 left-1/2 transform -translate-x-1/2"
           onClick={() => {
-            router.push("/admin/signup");
+            router.push("/auth/signup");
           }}
         >
           <p className="text-center text-[#817d7d] text-[14px]">

@@ -46,5 +46,5 @@ export const adminBottomNavLinks = [
     icon: Home,
     url: "/app/home",
   },
-  { id: "profile", label: "Profile", icon: User, url: "/app/profile" },
+  { id: "profile", label: "Profile", icon: User, url: "/app/my-profile" },
 ];

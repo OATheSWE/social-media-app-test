@@ -236,7 +236,7 @@ const Main = () => {
             Array.from({ length: 3 }).map((_, index) => (
               <div
                 key={index}
-                className="animate-pulse flex space-x-4 items-center"
+                className="animate-pulse w-full flex space-x-4 items-center"
               >
                 <div className="rounded-lg bg-[#ECEBF1] h-[250px] w-full"></div>
               </div>
