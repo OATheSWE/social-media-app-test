@@ -2,7 +2,7 @@ import { router } from "expo-router";
 import { useState } from "react";
 
 const BottomNav = ({ items }) => {
-    const [active, setActive] = useState("app/home");
+    const [active, setActive] = useState("/app/home");
 
     return (
         <div className=" fixed bottom-0 left-0 right-0 bg-white dark:bg-accent2 border-t border-gray-200 shadow-sm z-50">

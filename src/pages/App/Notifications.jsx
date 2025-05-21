@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Bell, BellIcon } from "lucide-react";
+import { BellIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Back, BottomNav } from "../../components";
-import { adminBottomNavLinks, pageTransitionX } from "../../../constants";
+import { Back } from "../../components";
+import { pageTransitionX } from "../../../constants";
 
 // Fake notification API simulation
 const fetchNotifications = () =>
@@ -134,7 +134,6 @@ const Notifications = () => {
         )}
       </div>
 
-      <BottomNav items={adminBottomNavLinks} />
     </motion.div>
   );
 };
