@@ -1,12 +1,16 @@
 import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants, pageTransitionX } from "@/constants";
-import { Back, Touchable } from "@/src/components";
+import { AlertError, AlertSuccess, Back, LoadingScreen, Touchable } from "@/src/components";
 import { router } from "expo-router";
+import axios from "axios";
 
 const VerifyNumber = () => {
   const [otp, setOtp] = useState(["", "", "", "", ""]);
   const inputsRef = useRef([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleChange = (value, index) => {
     if (!/^[0-9]?$/.test(value)) return;
@@ -23,6 +27,38 @@ const VerifyNumber = () => {
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) {
       inputsRef.current[index - 1].focus();
+    }
+  };
+
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const verifyCode = async () => {
+    setLoading(true);
+
+    try {
+      const response = await axios.get("http://localhost:3001/verification");
+      const data = response.data;
+      const enteredCode = otp.join("");
+
+      await sleep(500);
+
+      if (enteredCode === data.code) {
+        setSuccess("Phone number verified successfully!");
+        setError("");
+        setLoading(false);
+        setTimeout(() => {
+          router.push("/auth/personal-info");
+        }, 1000);
+      } else {
+        setError("Incorrect code.");
+        setSuccess("");
+        setLoading(false);
+      }
+    } catch (err) {
+      console.error("API error:", err.message);
+      setError("Network error.");
+      setSuccess("");
+      setLoading(false);
     }
   };
 
@@ -47,7 +83,7 @@ const VerifyNumber = () => {
         <motion.div variants={itemVariants}>
           <h1 className="text-3xl font-bold mb-4 text-black">Verify Number</h1>
           <p className="mb-6 text-gray-500">
-            Please enter five digits OTP sent to your whatsapp to continue.
+            Please enter five digits OTP sent to you to continue.
           </p>
         </motion.div>
 
@@ -75,7 +111,7 @@ const VerifyNumber = () => {
               <button
                 type="submit"
                 className="btn bg-accent2 text-white rounded-lg border-0 shadow-none w-full h-12 mt-4"
-                onClick={() => router.push("/auth/personal-info")}
+                onClick={verifyCode}
               >
                 Submit
               </button>
@@ -98,6 +134,10 @@ const VerifyNumber = () => {
           </motion.div>
         </div>
       </motion.div>
+
+      <AlertSuccess message={success} />
+      <AlertError message={error} />
+      <LoadingScreen visible={loading} />
     </motion.div>
   );
 };

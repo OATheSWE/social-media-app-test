@@ -18,7 +18,7 @@ const Signup = () => {
     setTimeout(() => {
       setLoading(false);
       router.push("/auth/verify-number");
-    }, 1500);
+    }, 500);
   };
 
   return (
