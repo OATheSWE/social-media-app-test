@@ -1,60 +1,55 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { ConfirmModal, Touchable } from "../../components";
 import { containerVariants, itemVariants, pageTransitionX } from "@/constants";
 import { motion } from "framer-motion";
-import { LogOut, Moon, Sun } from "lucide-react";
 import { router } from "expo-router";
+import { useAuth } from "@/src/context/AuthContext";
+import { LogOut, Moon, Sun } from "lucide-react";
 
-const MyProfile = () => {
+const UserProfile = () => {
+
   const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const [posts, setPosts] = useState([]);
+  const { userId, logout } = useAuth()
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState(null);
   const [isDark, setIsDark] = useState(false);
 
-  const posts = [
-    "https://randomuser.me/api/portraits/women/80.jpg",
-    "https://randomuser.me/api/portraits/women/80.jpg",
-    "https://randomuser.me/api/portraits/women/80.jpg",
-    "https://randomuser.me/api/portraits/women/80.jpg",
-    "https://randomuser.me/api/portraits/women/80.jpg",
-    "https://randomuser.me/api/portraits/women/80.jpg",
-  ];
-
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1500); // 1500ms = 1.5 seconds
-    return () => clearTimeout(timer);
-  }, []);
+    async function fetchData() {
+      try {
+        const [infRes, postsRes] = await Promise.all([
+          axios.get("http://localhost:3001/users"),
+          axios.get("http://localhost:3001/posts"),
+        ]);
 
-  useEffect(() => {
-    // On mount, check local storage or system preference
-    const root = window.document.documentElement;
-    const savedTheme = localStorage.getItem("theme");
+        // Find User by username
+        const foundUser = infRes.data.find(
+          (inf) => inf.id === userId
+        );
+        setUser(foundUser || null);
 
-    if (
-      savedTheme === "dark" ||
-      (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      root.classList.add("dark");
-      setIsDark(true);
-    } else {
-      root.classList.remove("dark");
-      setIsDark(false);
+        const username = foundUser?.username || "";
+
+        // Filter posts for the username
+        const userPosts = postsRes.data.filter(
+          (post) => post.username === username
+        );
+
+        // Map posts to image URLs or objects as needed
+        setPosts(userPosts);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setUser(null);
+        setPosts([]);
+      } finally {
+        setIsLoading(false);
+      }
     }
-  }, []);
-
-  const toggleTheme = () => {
-    const root = window.document.documentElement;
-    if (isDark) {
-      root.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    } else {
-      root.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    }
-    setIsDark(!isDark);
-  };
+    fetchData();
+  }, [userId]);
 
   const openModal = (type) => {
     setModalType(type);
@@ -63,7 +58,8 @@ const MyProfile = () => {
 
   const handleConfirm = () => {
     setModalOpen(false);
-    localStorage.removeItem("unique_id");
+    localStorage.removeItem("user_id");
+    logout();
     setTimeout(() => {
       router.push("/auth/login");
     }, 300);
@@ -130,7 +126,7 @@ const MyProfile = () => {
         </div>
       ) : (
         <motion.div
-          className="max-w-md mx-auto p-6 font-sans h-screen overflow-y-scroll pb-20"
+          className="max-w-md mx-auto p-6 font-sans"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -141,18 +137,21 @@ const MyProfile = () => {
           >
             <div className="flex gap-4 items-center">
               <img
-                src="https://randomuser.me/api/portraits/women/80.jpg"
+                src={
+                  user.image ||
+                  "https://randomuser.me/api/portraits/women/80.jpg"
+                }
                 alt="Profile"
                 className="rounded-full w-20 h-20 object-cover"
               />
               <div>
-                <h1 className="text-xl font-bold">Abdul Qudus</h1>
+                <h1 className="text-xl font-bold">{user.username}</h1>
                 <p className="text-sm text-gray-500 dark:text-white">
-                  Abeokuta, Ogun
+                  {user.region || "Lagos, Nigeria"}
                 </p>
               </div>
             </div>
-            <Touchable className="btn btn-ghost btn-sm" onClick={toggleTheme}>
+            <Touchable className="btn btn-ghost btn-sm" >
               {isDark ? (
                 <Sun className="w-5 h-5" />
               ) : (
@@ -165,12 +164,8 @@ const MyProfile = () => {
             className="flex items-center justify-between gap-2 mt-4"
             variants={itemVariants}
           >
-            <p className="mt-2 text-sm">
-              I’m a positive person. I love to travel and eat
-            </p>
-            <button className="btn bg-accent2 text-white dark:bg-white dark:text-accent2 btn-sm rounded-full px-6">
-              Follow
-            </button>
+            <p className="mt-2 text-sm">{user.about}</p>
+            
           </motion.div>
 
           <motion.div
@@ -178,15 +173,15 @@ const MyProfile = () => {
             variants={itemVariants}
           >
             <div>
-              <p className="font-bold">87</p>
+              <p className="font-bold">{posts.length || 0}</p>
               <p className="text-sm text-gray-500 dark:text-white">Posts</p>
             </div>
             <div>
-              <p className="font-bold">870</p>
+              <p className="font-bold">{user.following || 0}</p>
               <p className="text-sm text-gray-500 dark:text-white">Following</p>
             </div>
             <div>
-              <p className="font-bold">15k</p>
+              <p className="font-bold">{user.followers || 0}</p>
               <p className="text-sm text-gray-500 dark:text-white">Followers</p>
             </div>
           </motion.div>
@@ -194,10 +189,15 @@ const MyProfile = () => {
           <motion.div className="mt-6" variants={itemVariants}>
             <h2 className="font-bold mb-2">Posts</h2>
             <div className="grid grid-cols-3 gap-3">
-              {posts.map((img, idx) => (
-                <Touchable key={idx}>
+              {posts.map((post, idx) => (
+                <Touchable
+                  key={idx}
+                  onClick={() => {
+                    router.push(`/app/all-comments?id=${post.id}`);
+                  }}
+                >
                   <motion.img
-                    src={img}
+                    src={post.image}
                     alt={`Post ${idx + 1}`}
                     className="w-full h-24 object-cover rounded-xl"
                     variants={itemVariants}
@@ -206,11 +206,10 @@ const MyProfile = () => {
               ))}
             </div>
           </motion.div>
-
           <motion.div variants={itemVariants} className="w-full mt-15">
             <Touchable>
               <button
-                className="btn bg-red-700 text-white rounded-full w-full h-12 mt-4"
+                className="btn bg-red-700 text-white rounded-full w-full h-12 mt-20"
                 onClick={(e) => {
                   e.stopPropagation();
                   openModal("delete");
@@ -224,15 +223,16 @@ const MyProfile = () => {
         </motion.div>
       )}
 
+
       <ConfirmModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        onConfirm={handleConfirm}
-        onReject={handleReject}
-        type={modalType} // "delete" or "backlog"
-      />
+      isOpen={modalOpen}
+      onClose={() => setModalOpen(false)}
+      onConfirm={handleConfirm}
+      onReject={handleReject}
+      type={modalType} 
+    />
     </motion.div>
   );
 };
 
-export default MyProfile;
+export default UserProfile;
