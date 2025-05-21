@@ -206,41 +206,8 @@ const UserProfile = () => {
             </div>
             <div>
               <p className="font-bold text-black dark:text-white"></p>
-                {user.following || 0}
-              </p>
-              <p className="text-sm text-gray-500 dark:text-white">Following</p>
-            </div>
-            <div>
-              <p className="font-bold text-black dark:text-white">
-                {user.followers || 0}
-              </p>
-              <p className="text-sm text-gray-500 dark:text-white">Followers</p>
             </div>
           </motion.div>
-
-          {/* User posts */}
-          <motion.div className="mt-6" variants={itemVariants}>
-            <h2 className="font-bold mb-2 text-black dark:text-white">Posts</h2>
-            <div className="grid grid-cols-3 gap-3">
-              {posts.map((post, idx) => (
-                <Touchable
-                  key={idx}
-                  onClick={() => {
-                    router.push(`/app/all-comments?id=${post.id}`);
-                  }}
-                >
-                  <motion.img
-                    src={post.image}
-                    alt={`Post ${idx + 1}`}
-                    className="w-full h-24 object-cover rounded-xl"
-                    variants={itemVariants}
-                  />
-                </Touchable>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Logout button */}
           <motion.div variants={itemVariants} className="w-full mt-15">
             <Touchable>
               <button
@@ -258,14 +225,14 @@ const UserProfile = () => {
         </motion.div>
       )}
 
-      {/* Confirmation modal */}
+
       <ConfirmModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        onConfirm={handleConfirm}
-        onReject={handleReject}
-        type={modalType}
-      />
+      isOpen={modalOpen}
+      onClose={() => setModalOpen(false)}
+      onConfirm={handleConfirm}
+      onReject={handleReject}
+      type={modalType} 
+    />
     </motion.div>
   );
 };
