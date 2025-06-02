@@ -25,7 +25,7 @@ const AllComments = () => {
         const res = await axios.get("http://localhost:3001/posts");
 
         // Find the post that matches the provided `id`
-        const foundPost = res.data.find((p) => p.id === Number(id));
+        const foundPost = res.data.find((p) => p.id === id);
 
         // Update the `post` state with the found post or set it to `null` if not found
         setPost(foundPost || null);

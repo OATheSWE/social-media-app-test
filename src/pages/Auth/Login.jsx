@@ -65,9 +65,7 @@ export default function Login() {
                     localStorage.setItem("user_id", encryptedId);
 
                     setSuccessMessage("Login successful"); // Display a success message
-                    setTimeout(() => {
-                        router.push("/app/home"); // Redirect the user to the home page after a delay
-                    }, 1000);
+                   
                 } else {
                     // If the password is incorrect, display an error message
                     setError("Incorrect password.");
